@@ -82,3 +82,8 @@ Please follow the official [Swagger Documentation](https://toolbox.vercel.app/ap
 ## ✍️ Authors <a name = "authors"></a>
 
 - [@pedrohrbarros](https://github.com/pedrohrbarros) - Idea & Initial work
+
+<img
+  src="./src/assets/APIFlow.png"
+  alt="API expected flow"
+/>
