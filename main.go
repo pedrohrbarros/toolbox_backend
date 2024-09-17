@@ -2,8 +2,9 @@ package main
 
 import (
 	"log"
-	"os"
 
+	"github.com/pedrohrbarros/toolbox_backend/src/routes"
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
@@ -12,6 +13,12 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-	database_url := os.Getenv("DATABASE_URL")
-	log.Default().Println(database_url)
+
+	router := gin.Default()
+	
+	routes.InitRoutes(&router.RouterGroup)
+
+	if err := router.Run(":8080"); err != nil {
+		log.Fatal(err)
+	}
 }
