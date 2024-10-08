@@ -46,6 +46,7 @@ func ShortUrl(c *gin.Context) {
 	if err != nil {
 		error_message := fmt.Sprintf("Failed to read response: %v", err)
 		c.JSON(500, error_message)
+		return
 	}
 
 	defer response.Body.Close()
@@ -54,6 +55,7 @@ func ShortUrl(c *gin.Context) {
 	if err != nil {
 		error_message := fmt.Sprintf("Failed to read binary response: %v", err)
 		c.JSON(500, error_message)
+		return
 	}
 
 	var response_data map[string]interface{}
@@ -61,6 +63,7 @@ func ShortUrl(c *gin.Context) {
 	if err != nil {
 		error_message := fmt.Sprintf("Failed to parse response: %v", err)
 		c.JSON(500, error_message)
+		return
 	}
 
 	if link, ok := response_data["link"].(string); ok {
@@ -68,5 +71,6 @@ func ShortUrl(c *gin.Context) {
 	} else {
 		error_message := fmt.Sprintf("Failed to get link from response: %v", response_data)
 		c.JSON(500, error_message)
+		return
 	}
 }

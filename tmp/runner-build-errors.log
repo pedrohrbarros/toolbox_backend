@@ -1,0 +1,2 @@
+# github.com/pedrohrbarros/toolbox_backend/src/controller/document
+src\controller\document\handler.go:38:22: available_types.Contains undefined (type []string has no field or method Contains)

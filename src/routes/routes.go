@@ -8,6 +8,6 @@ import (
 
 func InitRoutes(r *gin.RouterGroup) {
 	r.POST("/shortener-url", url.ShortUrl)
-	r.POST("/convert-doc/:desired_type", document.convertFile)
+	r.POST("/convert-doc/:desired_type", document.ConvertFile)
 	r.POST("/secret-generator")
 }
