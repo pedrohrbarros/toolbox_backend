@@ -46,8 +46,8 @@ It will one endpoint for each short functionality
 
 ## 🚀 Future Scope <a name = "future_scope"></a>
 
-- [ ] URL Shortener API endpoint
-- [ ] Document converter API endpoint
+- [x] URL Shortener API endpoint
+- [x] PDF converter API endpoint
 - [ ] Password generator API endpoint
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
