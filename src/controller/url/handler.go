@@ -12,9 +12,19 @@ import (
 	"github.com/pedrohrbarros/toolbox_backend/src/middleware/error"
 )
 
+// @Summary URL Shortener
+// @Description Shorten a URL using Bitly API
+// @Tags URL
+// @Accept json
+// @Produce json
+// @Param url body string true "URL to shorten"
+// @Success 200 {string} "Shortened URL"
+// @Failures 404 {object} httputil.HTTPError
+// Failures 500 {object} httputil.HTTPError
+// @Router /url [post]
 func ShortUrl(c *gin.Context) {
 	var url_request struct {
-		URL string `json:"url"`
+		URL string `json:"url" example:"https://www.google.com"`
 	}
 	
 	if err := c.ShouldBindJSON(&url_request) ; err != nil {
