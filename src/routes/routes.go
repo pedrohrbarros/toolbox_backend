@@ -5,6 +5,7 @@ import (
 	"github.com/pedrohrbarros/toolbox_backend/src/controller/url"
 	"github.com/pedrohrbarros/toolbox_backend/src/controller/converter"
 	"github.com/pedrohrbarros/toolbox_backend/src/controller/secret"
+  docs "github.com/toolbox_backend/docs"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )

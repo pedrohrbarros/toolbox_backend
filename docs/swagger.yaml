@@ -1,0 +1,26 @@
+info:
+  contact: {}
+paths:
+  /url:
+    post:
+      consumes:
+      - application/json
+      description: Shorten a URL using Bitly API
+      parameters:
+      - description: URL to shorten
+        in: body
+        name: url
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: URL Shortener
+      tags:
+      - URL
+swagger: "2.0"

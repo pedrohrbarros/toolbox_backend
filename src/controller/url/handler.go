@@ -18,7 +18,7 @@ import (
 // @Accept json
 // @Produce json
 // @Param url body string true "URL to shorten"
-// @Success 200 {string} "Shortened URL"
+// @Success 200 {string} Shortened URL
 // @Failures 404 {object} httputil.HTTPError
 // Failures 500 {object} httputil.HTTPError
 // @Router /url [post]
