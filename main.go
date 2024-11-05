@@ -1,29 +1,34 @@
 package main
 
 import (
-	"log"
+	"cmp"
+	"log/slog"
 	"os"
 
 	"github.com/gin-gonic/gin"
-	docs "github.com/pedrohrbarros/toolbox_backend/docs"
-	"github.com/pedrohrbarros/toolbox_backend/src/routes"
+	sloggin "github.com/samber/slog-gin"
 )
 
 func main() {
 
-	router := gin.Default()
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 
-	routes.InitRoutes(&router.RouterGroup)
+	gin.SetMode(gin.ReleaseMode)
 
-	docs.SwaggerInfo.BasePath = "/swagger/"
+	r := gin.New()
 
-	port := os.Getenv("PORT")
+	r.Use(sloggin.New(logger))
+	r.Use(gin.Recovery())
 
-	if port == "" {
-		port = "3000"
-	}
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "Hello world!",
+		})
+	})
 
-	if err := router.Run(port); err != nil {
-		log.Fatal(err)
-	}
+	port := cmp.Or(os.Getenv("PORT"), "8080")
+
+	logger.Info("Server starting", slog.String("port", port))
+
+	r.Run((":" + port))
 }
