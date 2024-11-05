@@ -4,18 +4,27 @@ import (
 	"errors"
 	"fmt"
 	"mime/multipart"
-	"net/http"
 	"os"
 	"path/filepath"
-	"slices"
 	"strings"
 
 	gooxml "baliance.com/gooxml/document"
 	"github.com/gin-gonic/gin"
 	"github.com/jung-kurt/gofpdf"
 	"github.com/rs/zerolog/log"
+	api_err "github.com/pedrohrbarros/toolbox_backend/src/middleware/error"
 )
 
+// @Summary Document converter
+// @Description Convert a word file into pdf
+// @Tags Converter
+// @Accept mpfd
+// @Produce mpfd
+// @Param file formData file true "File that will be converted"
+// @Success 200 {file} File converted
+// @Failure 400 {object} error.ApiError
+// @Failure 500 {object} error.ApiError
+// @Router /convert [post]
 func ConvertFile(c *gin.Context) {
   type BindFile struct {
     File *multipart.FileHeader `form:"file" binding:"required"`
@@ -23,12 +32,10 @@ func ConvertFile(c *gin.Context) {
 
 	var bind_file BindFile
 
-	available_types := []string{"pdf", "docx"}
-
 	if err := c.ShouldBind(&bind_file); err != nil {
-    error_message := fmt.Sprintf("Failed to process request: %s", err.Error())
-		log.Error().Msg(error_message)
-		c.JSON(http.StatusBadRequest, gin.H{"Error": "Error while binding request"})
+		api_error := api_err.NewBadRequestError(fmt.Sprintf("Failed to process request=%s\n", err.Error()))
+		log.Error().Msg(api_error.Message)
+		c.JSON(api_error.Code, api_error)
 		return
 	}
 
@@ -36,32 +43,26 @@ func ConvertFile(c *gin.Context) {
 
   file_type := strings.Split(file.Filename, ".")[len(strings.Split(file.Filename, ".")) - 1]
 
-  if !slices.Contains(available_types, file_type) {
-    error_message := fmt.Sprintf("Invalid file type: %s", file_type)
-		log.Error().Msg(error_message)
-    c.JSON(http.StatusBadRequest, gin.H{"Error": error_message})
-    return
-  }
-
   destination := filepath.Base(file.Filename)
 
   if err := c.SaveUploadedFile(file, destination); err != nil {
-    error_message := fmt.Sprintf("Failed to upload file: %s", err.Error())
-		log.Error().Msg(error_message)
-    c.JSON(http.StatusBadRequest, gin.H{"Error": "Error while upload file"})
+		api_error := api_err.NewInternalServerError(fmt.Sprintf("Failed to upload file: %s", err.Error()))
+		log.Error().Msg(api_error.Message)
+    c.JSON(api_error.Code, api_error)
 		return
   }
 
   if file_type == "docx" {
     if err := ConvertDocxToPDF(c, destination); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+			api_error := api_err.NewInternalServerError(fmt.Sprintf("Failed to convert file: %s", err.Error()))
+			c.JSON(api_error.Code, api_error)
 			return
 		}
 		return
   } else {
-		error_message := "Not allowed type"
-		log.Error().Msg(error_message)
-		c.JSON(http.StatusNotAcceptable, gin.H{"Message": error_message})
+		api_error := api_err.NewBadRequestError("Not allowed type")
+		log.Error().Msg(api_error.Message)
+		c.JSON(api_error.Code, api_error)
 		return
 	}
 }

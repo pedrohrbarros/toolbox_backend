@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/pedrohrbarros/toolbox_backend/src/routes"
-	
+	docs "github.com/pedrohrbarros/toolbox_backend/docs"
 )
 
 func main() {
@@ -18,6 +18,8 @@ func main() {
 	router := gin.Default()
 
 	routes.InitRoutes(&router.RouterGroup)
+
+	docs.SwaggerInfo.BasePath = "/swagger/"
 
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)

@@ -9,6 +9,16 @@ import (
 	"github.com/pedrohrbarros/toolbox_backend/src/middleware/error"
 )
 
+// @Summary Secret Generator
+// @Description Generate secret based in the params
+// @Tags Secret
+// @Accept json
+// @Produce json
+// @Param request body secret.GenerateSecret.Request true "Lenght of the secret that'll be generated"
+// @Success 200 {string} string "sl5=wv_X/OK/"
+// @Failure 400 {object} error.ApiError
+// @Failure 500 {object} error.ApiError
+// @Router /secret-generator [post]
 func GenerateSecret(c *gin.Context) {
 	type Request struct {
 		SpecialCharacters bool `json:"special_characters"`

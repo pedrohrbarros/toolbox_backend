@@ -1,6 +1,99 @@
+definitions:
+  error.ApiError:
+    properties:
+      causes:
+        items:
+          $ref: '#/definitions/error.Causes'
+        type: array
+      code:
+        type: integer
+      error:
+        type: string
+      message:
+        type: string
+    type: object
+  error.Causes:
+    properties:
+      field:
+        type: string
+      message:
+        type: string
+    type: object
+  secret.GenerateSecret.Request:
+    properties:
+      length:
+        type: integer
+      letters:
+        type: boolean
+      numbers:
+        type: boolean
+      special_characters:
+        type: boolean
+      uppercase_characters:
+        type: boolean
+    type: object
 info:
   contact: {}
 paths:
+  /convert:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Convert a word file into pdf
+      parameters:
+      - description: File that will be converted
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - multipart/form-data
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: file
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error.ApiError'
+      summary: Document converter
+      tags:
+      - Converter
+  /secret-generator:
+    post:
+      consumes:
+      - application/json
+      description: Generate secret based in the params
+      parameters:
+      - description: Lenght of the secret that'll be generated
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/secret.GenerateSecret.Request'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: sl5=wv_X/OK/
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error.ApiError'
+      summary: Secret Generator
+      tags:
+      - Secret
   /url:
     post:
       consumes:
@@ -17,9 +110,17 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: https://bit.ly/example
           schema:
             type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error.ApiError'
       summary: URL Shortener
       tags:
       - URL
