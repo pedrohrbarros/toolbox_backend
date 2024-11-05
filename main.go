@@ -2,11 +2,12 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/pedrohrbarros/toolbox_backend/src/routes"
 	docs "github.com/pedrohrbarros/toolbox_backend/docs"
+	"github.com/pedrohrbarros/toolbox_backend/src/routes"
 )
 
 func main() {
@@ -21,7 +22,7 @@ func main() {
 
 	docs.SwaggerInfo.BasePath = "/swagger/"
 
-	if err := router.Run(":8080"); err != nil {
+	if err := router.Run(os.Getenv("PORT")); err != nil {
 		log.Fatal(err)
 	}
 }
