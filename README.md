@@ -48,13 +48,13 @@ It will one endpoint for each short functionality
 
 - [x] URL Shortener API endpoint
 - [x] PDF converter API endpoint
-- [ ] Password generator API endpoint
+- [x] Password generator API endpoint
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
 Clone the project
 ```
-git clone https://github.com/pedrohrbarros/toolbox
+git clone https://github.com/pedrohrbarros/toolbox_backend
 ```
 
 ### Prerequisites
