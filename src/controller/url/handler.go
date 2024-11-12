@@ -36,7 +36,6 @@ func ShortUrl(c *gin.Context) {
 
 	group_guid := cmp.Or(os.Getenv("BITLY_GROUP_GUID"), "default")
 	bitly_access_token := cmp.Or(os.Getenv("BITLY_ACCESS_TOKEN"), "")
-  fmt.Println(group_guid)
 
 	api_url := "https://api-ssl.bitly.com/v4/shorten"
 	data, _ := json.Marshal(map[string]string{

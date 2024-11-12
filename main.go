@@ -22,7 +22,7 @@ func main() {
 
 	docs.SwaggerInfo.BasePath = "/swagger/"
 
-	port := cmp.Or(os.Getenv("PORT"), "8080")
+	port := cmp.Or(os.Getenv("PORT"), "8000")
 
 	log.Print("Server running on port " + port)
 
