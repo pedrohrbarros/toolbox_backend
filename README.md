@@ -6,7 +6,6 @@
 
 <div align="center">
 
-[![Toolbox](https://img.shields.io/badge/hackathon-name-orange.svg)](https://toolbox.vercel.app)
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 
 </div>
@@ -22,12 +21,8 @@
 - [Problem Statement](#problem_statement)
 - [Idea / Solution](#idea)
 - [Future Scope](#future_scope)
-- [Setting up a local environment](#getting_started)
-- [Usage](#usage)
-- [Technology Stack](#tech_stack)
-- [Contributing](#contributing)
+- [Getting started](#getting_started)
 - [Authors](#authors)
-- [Acknowledgments](#acknowledgments)
 
 ## 🧐 Problem Statement <a name = "problem_statement"></a>
 
@@ -50,6 +45,11 @@ It will one endpoint for each short functionality
 - [x] PDF converter API endpoint
 - [x] Password generator API endpoint
 
+<img
+  src="./src/assets/APIFlow.png"
+  alt="API expected flow"
+/>
+
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
 Clone the project
@@ -71,7 +71,7 @@ go get ./go.sum
 
 ## 🎈 Usage <a name="usage"></a>
 
-Please follow the official [Swagger Documentation](https://toolbox.vercel.app/api/docs/)
+Please follow the official [Swagger Documentation](https://toolboxbackend-production.up.railway.app/swagger/index.html)
 
 ## ⛏️ Built With <a name = "tech_stack"></a>
 
@@ -81,9 +81,4 @@ Please follow the official [Swagger Documentation](https://toolbox.vercel.app/ap
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@pedrohrbarros](https://github.com/pedrohrbarros) - Idea & Initial work
-
-<img
-  src="./src/assets/APIFlow.png"
-  alt="API expected flow"
-/>
+- [@pedrohrbarros](https://github.com/pedrohrbarros)

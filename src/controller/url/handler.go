@@ -2,6 +2,7 @@ package url
 
 import (
 	"bytes"
+	"cmp"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -33,9 +34,12 @@ func ShortUrl(c *gin.Context) {
 		return
 	}
 
+	group_guid := cmp.Or(os.Getenv("BITLY_GROUP_GUID"), "default")
+	bitly_access_token := cmp.Or(os.Getenv("BITLY_ACCESS_TOKEN"), "")
+
 	api_url := "https://api-ssl.bitly.com/v4/shorten"
 	data, _ := json.Marshal(map[string]string{
-		"group_guid": os.Getenv("BITLY_GROUP_GUID"),
+		"group_guid": group_guid,
 		"long_url":   url_request.URL,
 	})
 
@@ -48,7 +52,7 @@ func ShortUrl(c *gin.Context) {
 		return
 	}
 
-	request.Header.Set("Authorization", fmt.Sprintf("Bearer %s", os.Getenv("BITLY_ACCESS_TOKEN")))
+	request.Header.Set("Authorization", fmt.Sprintf("Bearer %s", bitly_access_token))
 	request.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{}
@@ -79,6 +83,9 @@ func ShortUrl(c *gin.Context) {
 	if link, ok := response_data["link"].(string); ok {
 		c.JSON(200, link)
 	} else {
+		for key, value := range response_data {
+			fmt.Printf("%s: %d\n", key, value)
+		}
 		api_error := error.NewInternalServerError(fmt.Sprintf("Failed to get link from response: %v", response_data))
 		c.JSON(api_error.Code, api_error)
 		return

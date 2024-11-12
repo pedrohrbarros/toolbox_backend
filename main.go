@@ -6,11 +6,17 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	docs "github.com/pedrohrbarros/toolbox_backend/docs"
 	"github.com/pedrohrbarros/toolbox_backend/src/routes"
 )
 
 func main() {
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 
 	gin.SetMode(gin.ReleaseMode)
 
