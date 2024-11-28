@@ -21,25 +21,25 @@ import (
 // @Router /secret-generator [post]
 func GenerateSecret(c *gin.Context) {
 	type Request struct {
-		SpecialCharacters bool `json:"special_characters"`
+		SpecialCharacters   bool `json:"special_characters"`
 		UpperCaseCharacters bool `json:"uppercase_characters"`
-		Letters bool `json:"letters"`
-		Numbers bool `json:"numbers"`
-		Length int `json:"length"`
+		LowCaseCharacters   bool `json:"lowcase_characters"`
+		Numbers             bool `json:"numbers"`
+		Length              int  `json:"length"`
 	}
 
 	var request Request
 
-	if err := c.ShouldBindJSON(&request) ; err != nil {
+	if err := c.ShouldBindJSON(&request); err != nil {
 		api_error := error.NewBadRequestError(fmt.Sprintf("Incorrect request=%s\n", err.Error()))
 		c.JSON(api_error.Code, api_error)
 		return
 	}
 
 	const (
-		letters        = "abcdefghijklmnopqrstuvwxyz"
-		uppercase_letters   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		numbers        = "0123456789"
+		lowcase_characters   = "abcdefghijklmnopqrstuvwxyz"
+		uppercase_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		numbers              = "0123456789"
 		special_characters   = "!@#$%^&*()-_=+[]{}<>?/|"
 	)
 	var all_characters string
@@ -49,15 +49,21 @@ func GenerateSecret(c *gin.Context) {
 	}
 
 	if request.UpperCaseCharacters {
-		all_characters += uppercase_letters
+		all_characters += uppercase_characters
 	}
 
-	if request.Letters {
-		all_characters += letters
+	if request.LowCaseCharacters {
+		all_characters += lowcase_characters
 	}
 
 	if request.Numbers {
 		all_characters += numbers
+	}
+
+	if (!request.Numbers && !request.LowCaseCharacters && !request.UpperCaseCharacters && !request.SpecialCharacters) {
+		error_message := error.NewBadRequestError("At least one type of secret must be selected")
+		c.JSON(error_message.Code, error_message)
+		return
 	}
 
 	password := make([]byte, request.Length)

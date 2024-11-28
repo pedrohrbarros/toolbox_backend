@@ -25,7 +25,7 @@ import (
 // @Router /url [post]
 func ShortUrl(c *gin.Context) {
 	var url_request struct {
-		URL string `json:"url" example:"https://www.google.com"`
+		URL string `json:"url" example:"https://www.google.com" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&url_request); err != nil {

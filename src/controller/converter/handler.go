@@ -11,8 +11,8 @@ import (
 	gooxml "baliance.com/gooxml/document"
 	"github.com/gin-gonic/gin"
 	"github.com/jung-kurt/gofpdf"
-	"github.com/rs/zerolog/log"
 	api_err "github.com/pedrohrbarros/toolbox_backend/src/middleware/error"
+	"github.com/rs/zerolog/log"
 )
 
 // @Summary Document converter
