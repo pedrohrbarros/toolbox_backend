@@ -37,13 +37,14 @@ Unify all these functions to one simpel and intuitive website to all public with
 
 This repository will be the backend of it.
 
-It will one endpoint for each short functionality
+It will be one endpoint for each short functionality
 
 ## 🚀 Future Scope <a name = "future_scope"></a>
 
 - [x] URL Shortener API endpoint
 - [x] PDF converter API endpoint
 - [x] Password generator API endpoint
+- [ ] Request limit
 
 <img
   src="./src/assets/APIFlow.png"
