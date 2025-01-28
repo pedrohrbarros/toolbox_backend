@@ -23,7 +23,7 @@ definitions:
     properties:
       length:
         type: integer
-      letters:
+      lowcase_characters:
         type: boolean
       numbers:
         type: boolean
@@ -64,6 +64,43 @@ paths:
       summary: Document converter
       tags:
       - Converter
+  /edit-image:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Edit an image based on the parameters in the request
+      parameters:
+      - description: JPEG image file to edit (only accepts .jpeg files)
+        in: formData
+        name: image
+        required: true
+        type: file
+      - description: Image width
+        in: query
+        name: width
+        type: integer
+      - description: Image height
+        in: query
+        name: height
+        type: integer
+      produces:
+      - image/jpeg
+      responses:
+        "200":
+          description: Converted file
+          schema:
+            type: file
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error.ApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error.ApiError'
+      summary: Image Editor
+      tags:
+      - Image
   /secret-generator:
     post:
       consumes:

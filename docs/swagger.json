@@ -48,6 +48,62 @@
                 }
             }
         },
+        "/edit-image": {
+            "post": {
+                "description": "Edit an image based on the parameters in the request",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "image/jpeg"
+                ],
+                "tags": [
+                    "Image"
+                ],
+                "summary": "Image Editor",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "JPEG image file to edit (only accepts .jpeg files)",
+                        "name": "image",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Image width",
+                        "name": "width",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Image height",
+                        "name": "height",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Converted file",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/error.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/error.ApiError"
+                        }
+                    }
+                }
+            }
+        },
         "/secret-generator": {
             "post": {
                 "description": "Generate secret based in the params",
@@ -179,7 +235,7 @@
                 "length": {
                     "type": "integer"
                 },
-                "letters": {
+                "lowcase_characters": {
                     "type": "boolean"
                 },
                 "numbers": {

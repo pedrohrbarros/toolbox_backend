@@ -14,12 +14,11 @@ import (
 // @Summary Image Editor
 // @Description Edit an image based on the parameters in the request
 // @Tags Image
-// @Accept json
-// @Produce json
 // @Accept multipart/form-data
+// @Produce image/jpeg
+// @Param image formData file true "JPEG image file to edit (only accepts .jpeg files)"
 // @Param width query int false "Image width"
 // @Param height query int false "Image height"
-// @Param image formData file true "Image to edit"
 // @Success 200 {file} File "Converted file"
 // @Failure 400 {object} error.ApiError
 // @Failure 500 {object} error.ApiError
@@ -57,7 +56,7 @@ func ResizeImage(c *gin.Context) {
   
   image, err := jpeg.Decode(file_reader)
 	if err != nil {
-    api_error := error.NewInternalServerError(fmt.Sprintf("Failed to open image: %s", err.Error()))
+    api_error := error.NewBadRequestError(fmt.Sprintf("Only JPEG image types are allowed: %s", err.Error()))
     log.Error().Msg(api_error.Message)
     c.JSON(api_error.Code, api_error)
     return

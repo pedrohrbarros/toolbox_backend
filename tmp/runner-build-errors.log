@@ -1,4 +1,0 @@
-# github.com/pedrohrbarros/toolbox_backend/src/controller/image
-src\controller\image\handler.go:79:15: too many arguments in call to c.File
-	have (number, string)
-	want (string)
