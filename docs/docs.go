@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/convert": {
+        "/file/convert": {
             "post": {
                 "description": "Convert a word file into pdf",
                 "consumes": [
@@ -25,7 +25,7 @@ const docTemplate = `{
                     "multipart/form-data"
                 ],
                 "tags": [
-                    "Converter"
+                    "File"
                 ],
                 "summary": "Document converter",
                 "parameters": [
@@ -34,6 +34,13 @@ const docTemplate = `{
                         "description": "File that will be converted",
                         "name": "file",
                         "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Expected type that will be converted",
+                        "name": "expected_type",
+                        "in": "query",
                         "required": true
                     }
                 ],
@@ -59,7 +66,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/edit-image": {
+        "/file/image/resize": {
             "post": {
                 "description": "Edit an image based on the parameters in the request",
                 "consumes": [
@@ -69,7 +76,7 @@ const docTemplate = `{
                     "image/jpeg"
                 ],
                 "tags": [
-                    "Image"
+                    "File"
                 ],
                 "summary": "Image Editor",
                 "parameters": [
@@ -115,7 +122,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/secret-generator": {
+        "/secret/generator": {
             "post": {
                 "description": "Generate secret based in the params",
                 "consumes": [
@@ -161,7 +168,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/url": {
+        "/url/shortener": {
             "post": {
                 "description": "Shorten a URL using Bitly API",
                 "consumes": [

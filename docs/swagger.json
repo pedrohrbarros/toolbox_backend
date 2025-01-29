@@ -4,7 +4,7 @@
         "contact": {}
     },
     "paths": {
-        "/convert": {
+        "/file/convert": {
             "post": {
                 "description": "Convert a word file into pdf",
                 "consumes": [
@@ -14,7 +14,7 @@
                     "multipart/form-data"
                 ],
                 "tags": [
-                    "Converter"
+                    "File"
                 ],
                 "summary": "Document converter",
                 "parameters": [
@@ -23,6 +23,13 @@
                         "description": "File that will be converted",
                         "name": "file",
                         "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Expected type that will be converted",
+                        "name": "expected_type",
+                        "in": "query",
                         "required": true
                     }
                 ],
@@ -48,7 +55,7 @@
                 }
             }
         },
-        "/edit-image": {
+        "/file/image/resize": {
             "post": {
                 "description": "Edit an image based on the parameters in the request",
                 "consumes": [
@@ -58,7 +65,7 @@
                     "image/jpeg"
                 ],
                 "tags": [
-                    "Image"
+                    "File"
                 ],
                 "summary": "Image Editor",
                 "parameters": [
@@ -104,7 +111,7 @@
                 }
             }
         },
-        "/secret-generator": {
+        "/secret/generator": {
             "post": {
                 "description": "Generate secret based in the params",
                 "consumes": [
@@ -150,7 +157,7 @@
                 }
             }
         },
-        "/url": {
+        "/url/shortener": {
             "post": {
                 "description": "Shorten a URL using Bitly API",
                 "consumes": [

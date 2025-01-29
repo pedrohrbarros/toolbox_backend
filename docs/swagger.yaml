@@ -35,7 +35,7 @@ definitions:
 info:
   contact: {}
 paths:
-  /convert:
+  /file/convert:
     post:
       consumes:
       - multipart/form-data
@@ -46,6 +46,11 @@ paths:
         name: file
         required: true
         type: file
+      - description: Expected type that will be converted
+        in: query
+        name: expected_type
+        required: true
+        type: string
       produces:
       - multipart/form-data
       responses:
@@ -63,8 +68,8 @@ paths:
             $ref: '#/definitions/error.ApiError'
       summary: Document converter
       tags:
-      - Converter
-  /edit-image:
+      - File
+  /file/image/resize:
     post:
       consumes:
       - multipart/form-data
@@ -100,8 +105,8 @@ paths:
             $ref: '#/definitions/error.ApiError'
       summary: Image Editor
       tags:
-      - Image
-  /secret-generator:
+      - File
+  /secret/generator:
     post:
       consumes:
       - application/json
@@ -131,7 +136,7 @@ paths:
       summary: Secret Generator
       tags:
       - Secret
-  /url:
+  /url/shortener:
     post:
       consumes:
       - application/json

@@ -23,7 +23,9 @@ func main() {
 
 	router.Use(gin.Recovery())
 
-	docs.SwaggerInfo.BasePath = "/swagger/"
+	docs.SwaggerInfo.BasePath = "/"
+	docs.SwaggerInfo.Description = "Toolbox API documentation for any day-to-day function"
+	docs.SwaggerInfo.Title = "Toolbox Swagger UI"
 
 	port := cmp.Or(os.Getenv("PORT"), "8000")
 
