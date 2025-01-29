@@ -22,7 +22,7 @@ import (
 // @Success 200 {string} string "https://bit.ly/example"
 // @Failure 400 {object} error.ApiError
 // @Failure 500 {object} error.ApiError
-// @Router /url [post]
+// @Router /url/shortener [post]
 func ShortUrl(c *gin.Context) {
 	var url_request struct {
 		URL string `json:"url" example:"https://www.google.com" binding:"required"`

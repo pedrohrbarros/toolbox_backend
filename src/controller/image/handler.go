@@ -22,7 +22,7 @@ import (
 // @Success 200 {file} File "Converted file"
 // @Failure 400 {object} error.ApiError
 // @Failure 500 {object} error.ApiError
-// @Router /edit-image [post]
+// @Router /image/resize [post]
 func ResizeImage(c *gin.Context) {
   type Params struct {
     Width            int  `form:"width"`

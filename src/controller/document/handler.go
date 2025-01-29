@@ -1,4 +1,4 @@
-package file
+package document
 
 import (
 	"errors"
@@ -24,7 +24,7 @@ import (
 // @Success 200 {file} File converted
 // @Failure 400 {object} error.ApiError
 // @Failure 500 {object} error.ApiError
-// @Router /convert [post]
+// @Router /file/convert [post]
 func ConvertFile(c *gin.Context) {
   type BindFile struct {
     File *multipart.FileHeader `form:"file" binding:"required"`

@@ -18,7 +18,7 @@ import (
 // @Success 200 {string} string "sl5=wv_X/OK/"
 // @Failure 400 {object} error.ApiError
 // @Failure 500 {object} error.ApiError
-// @Router /secret-generator [post]
+// @Router /secret/generator [post]
 func GenerateSecret(c *gin.Context) {
 	type Request struct {
 		SpecialCharacters   bool `json:"special_characters"`
