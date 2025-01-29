@@ -35,7 +35,7 @@ definitions:
 info:
   contact: {}
 paths:
-  /file/convert:
+  /file/converter:
     post:
       consumes:
       - multipart/form-data
@@ -69,7 +69,7 @@ paths:
       summary: Document converter
       tags:
       - File
-  /file/image/resize:
+  /file/image/resizer:
     post:
       consumes:
       - multipart/form-data

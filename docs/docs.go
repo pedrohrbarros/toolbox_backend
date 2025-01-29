@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/file/convert": {
+        "/file/converter": {
             "post": {
                 "description": "Convert a word file into pdf",
                 "consumes": [
@@ -66,7 +66,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/file/image/resize": {
+        "/file/image/resizer": {
             "post": {
                 "description": "Edit an image based on the parameters in the request",
                 "consumes": [

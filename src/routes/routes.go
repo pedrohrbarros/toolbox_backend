@@ -11,8 +11,8 @@ import (
 
 func InitRoutes(r *gin.RouterGroup) {
 	r.POST("/url/shortener", url.ShortUrl)
-	r.POST("/file/convert", file.ConvertFile)
+	r.POST("/file/converter", file.ConvertFile)
 	r.POST("/secret/generator", secret.GenerateSecret)
-	r.POST("/file/image/resize", file.ResizeImage)
+	r.POST("/file/image/resizer", file.ResizeImage)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 }

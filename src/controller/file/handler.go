@@ -27,7 +27,7 @@ import (
 // @Success 200 {file} File converted
 // @Failure 400 {object} error.ApiError
 // @Failure 500 {object} error.ApiError
-// @Router /file/convert [post]
+// @Router /file/converter [post]
 func ConvertFile(c *gin.Context) {
   type BindFile struct {
     File *multipart.FileHeader `form:"file" binding:"required"`
@@ -138,7 +138,7 @@ func ConvertDocxToPDF(c *gin.Context, destination string) error {
 // @Success 200 {file} File "Converted file"
 // @Failure 400 {object} error.ApiError
 // @Failure 500 {object} error.ApiError
-// @Router /file/image/resize [post]
+// @Router /file/image/resizer [post]
 func ResizeImage(c *gin.Context) {
   type Params struct {
     Width            int  `form:"width"`

@@ -4,7 +4,7 @@
         "contact": {}
     },
     "paths": {
-        "/file/convert": {
+        "/file/converter": {
             "post": {
                 "description": "Convert a word file into pdf",
                 "consumes": [
@@ -55,7 +55,7 @@
                 }
             }
         },
-        "/file/image/resize": {
+        "/file/image/resizer": {
             "post": {
                 "description": "Edit an image based on the parameters in the request",
                 "consumes": [
